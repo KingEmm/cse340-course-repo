@@ -1,5 +1,22 @@
-    <footer>
-        <p>&copy; <%= new Date().getFullYear() %> CSE 340 Service Network.</p>
+    <footer aria-labelledby="footer-heading">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <p id="footer-heading" class="footer-title">About the CSE 340 Service Network</p>
+                <p>Empowering students with service learning opportunities, community partnerships, and meaningful project collaboration.</p>
+            </div>
+            <nav class="footer-nav" aria-label="Footer navigation">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/organizations">Organizations</a></li>
+                    <li><a href="/projects">Projects</a></li>
+                    <li><a href="/categories">Categories</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="footer-bottom">
+            <p>Contact: <a href="mailto:info@cse340.example.com">info@cse340.example.com</a></p>
+            <p>&copy; <%= new Date().getFullYear() %> CSE 340 Service Network. All rights reserved.</p>
+        </div>
     </footer>
 </body>
 </html>

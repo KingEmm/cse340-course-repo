@@ -27,6 +27,11 @@ app.get('/', async (req, res) => {
   res.render('home', { title });
 });
 
+app.get('/categories', async (req, res) => {
+  const title = 'Categories';
+  res.render('categories', { title });
+});
+
 app.get('/organizations', async (req, res) => {
   const title = 'Organisations';
   res.render('home', { title });
@@ -36,6 +41,7 @@ app.get('/projects', async (req, res) => {
   const title = 'Projects';
   res.render('home', { title });
 });
+
 
 app.listen(PORT, () => {
   console.log(`Server is running at http://127.0.0.1:${PORT}`);
