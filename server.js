@@ -1,4 +1,5 @@
 import { getAllOrganizations } from './src/models/organizations.js';
+import { getAllProjects } from './src/models/projects.js';
 import express from 'express';
 import { fileURLToPath } from 'url';
 import path from 'path';
@@ -39,13 +40,15 @@ app.get('/categories', async (req, res) => {
 app.get('/organizations', async (req, res) => {
   const title = 'Organisations';
   const organizations = await getAllOrganizations();
-  console.log('Fetched organizations:', organizations);
+  // console.log('Fetched organizations:', organizations);
   res.render('organizations', { title, organizations });
 });
 
 app.get('/projects', async (req, res) => {
   const title = 'Projects';
-  res.render('projects', { title });
+  const projects = await getAllProjects();
+  // console.log('Fetched projects:', projects);
+  res.render('projects', { title, projects });
 });
 
 

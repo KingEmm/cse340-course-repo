@@ -11,7 +11,16 @@
     </section>
 
     <section class="navigation-highlights">
-        <div class="feature">
+        <% projects.forEach(project => { %>
+            <div class="feature">
+                <h3><%= project.title %></h3>
+                <strong><%= project.name %></strong>
+                <p><%= project.description %></p>
+                <p><strong>Location:</strong> <%= project.location %></p>
+                <p><strong>Project Date:</strong> <%= project.project_date %></p>
+            </div>
+        <% }); %>
+        <!-- <div class="feature">
             <h3>Design & Development</h3>
             <p>Work on websites, apps, and digital experiences that support mission-driven programs and services.</p>
         </div>
@@ -22,7 +31,7 @@
         <div class="feature">
             <h3>Community Outreach</h3>
             <p>Help coordinate activities, communication, and volunteer initiatives with local stakeholders.</p>
-        </div>
+        </div> -->
     </section>
 
     <section class="call-to-action">
