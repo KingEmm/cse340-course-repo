@@ -34,12 +34,12 @@ app.get('/categories', async (req, res) => {
 
 app.get('/organizations', async (req, res) => {
   const title = 'Organisations';
-  res.render('home', { title });
+  res.render('organizations', { title });
 });
 
 app.get('/projects', async (req, res) => {
   const title = 'Projects';
-  res.render('home', { title });
+  res.render('projects', { title });
 });
 
 

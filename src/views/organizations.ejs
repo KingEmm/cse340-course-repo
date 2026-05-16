@@ -31,11 +31,20 @@
         background: rgba(255,255,255,0.96);
         border-color: rgba(79,70,229,0.18);
         box-shadow: inset 0 0 0 1px rgba(79,70,229,0.05);
+        margin: 1rem;
+        display: grid;
+        grid-template-columns: 27% 70%;
+        column-gap: 3%;
+        & img{
+            width: 100%;
+            grid-row: 1 / span 2;
+            border-radius: .5rem;
+        }
+        & h3 {
+            color: #4338ca;
+        }
     }
 
-    .feature h3 {
-        color: #4338ca;
-    }
 
     .intro {
         border-color: rgba(99,102,241,0.18);
@@ -65,17 +74,17 @@
     
     <section class="organization-highlights">
         <div class="feature">
-            <img src="/public/images/flux_forge.png" alt="Flux Forge">
+            <img loading="lazy" src="/images/flux_forge.png" alt="Flux Forge">
             <h3>Flux Forge Nonprofit Partners</h3>
             <p>Work with charity organizations that need student support for outreach systems, volunteer coordination, and impact reporting.</p>
         </div>
         <div class="feature">
-            <img src="/public/images/nova_byte.png" alt="Nova Byte">
+            <img loading="lazy" src="/images/nova_byte.png" alt="Nova Byte">
             <h3>Nova Byte Initiatives</h3>
             <p>Join student-led groups and department programs focused on mentoring, sustainability, and improving campus services.</p>
         </div>
         <div class="feature">
-            <img src="/public/images/terra_pulse.png" alt="Terra Pulse">
+            <img loading="lazy" src="/images/terra_pulse.png" alt="Terra Pulse">
             <h3>Terra Pulse</h3>
             <p>Terra helps you collaborate with community enterprises on technology solutions that increase efficiency, accessibility, and customer engagement.</p>
         </div>

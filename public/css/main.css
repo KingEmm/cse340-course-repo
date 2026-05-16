@@ -36,7 +36,6 @@ a {
 main {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 28px 24px 56px;
 }
 
 nav {
@@ -45,37 +44,37 @@ nav {
     justify-content: space-between;
     gap: 16px;
     padding: 18px 24px;
-    background: rgba(255,255,255,0.95);
-    border-bottom: 1px solid rgba(148,163,184,0.25);
+    /* background: rgba(255,255,255,0.95); */
     position: sticky;
     top: 0;
     z-index: 10;
-    backdrop-filter: blur(10px);
+
+    & ul {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 18px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    & a {
+        color: #0f172a;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.2s ease, transform 0.2s ease;
+        &:hover,
+        &:focus-visible {
+            color: #2563eb;
+            transform: translateY(-1px);
+            outline: none;
+        }
+    }
 }
 
-nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 18px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
 
-nav a {
-    color: #0f172a;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.2s ease, transform 0.2s ease;
-}
 
-nav a:hover,
-nav a:focus-visible {
-    color: #2563eb;
-    transform: translateY(-1px);
-    outline: none;
-}
 
 .skip-link {
     position: absolute;
@@ -95,11 +94,12 @@ nav a:focus-visible {
 
 .site-header {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     gap: 18px;
-    padding: 18px 24px;
-    background: rgba(255,255,255,0.95);
-    border-bottom: 1px solid rgba(148,163,184,0.25);
+    padding: 1rem 24px;
+    /* background: rgba(192, 187, 187, 0.726); */
+    border-bottom: 1px solid rgb(83, 90, 97);
     position: sticky;
     top: 0;
     z-index: 10;
@@ -179,24 +179,28 @@ nav a:focus-visible {
     color: #2563eb;
 }
 
+
 .hero,
 .intro,
 .navigation-highlights,
 .call-to-action {
-    background: #ffffff;
+    background: #ffffffb4;
     border: 1px solid rgba(148,163,184,0.2);
     border-radius: 24px;
     box-shadow: 0 18px 50px rgba(15,23,42,0.08);
     padding: 32px;
-    margin-bottom: 24px;
+    margin: 28px 24px 56px;
+    backdrop-filter: blur(10px);
+    /* margin-bottom: 24px; */
 }
 
 .hero h1,
 .intro h2,
 .call-to-action h2 {
     margin: 0 0 18px;
+    line-height: 1.05; 
+    font-weight: bold;
     font-size: clamp(2rem, 2.6vw, 3.2rem);
-    line-height: 1.05;
 }
 
 .hero p,
@@ -205,8 +209,38 @@ nav a:focus-visible {
 .navigation-highlights p {
     margin: 0;
     color: #334155;
-    font-size: 1.06rem;
+    /* font-weight: bold; */
+    font-size: 1.5rem;
+    @media (max-width: 660px) {
+        font-size: 1.06rem;
+    }
 }
+
+.hero{
+    font-size: 4rem;
+    position: relative;
+    margin: 0;
+    width: 100%;
+    margin: 0;
+    color: #ffffff;
+    height: 50vh;
+    @media (max-width: 860px) {
+        height: 40vh;
+    }
+    & p{
+        color: #ffffff;
+    }
+    & img{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+}
+
 
 .feature {
     padding: 24px;
@@ -249,10 +283,6 @@ footer p {
     nav {
         flex-direction: column;
         align-items: flex-start;
-    }
-
-    main {
-        padding: 20px 18px 44px;
     }
 
     .navigation-highlights {
