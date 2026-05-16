@@ -37,7 +37,7 @@
         column-gap: 3%;
         & img{
             width: 100%;
-            grid-row: 1 / span 2;
+            grid-row: 1 / span 3;
             border-radius: .5rem;
         }
         & h3 {
@@ -71,23 +71,17 @@
         <h2>Purpose-driven collaborators</h2>
         <p>Each organization listed here has a real mission and specific needs. Learn how they apply technology, design, and service to solve local problems and support community goals.</p>
     </section>
+
     
     <section class="organization-highlights">
-        <div class="feature">
-            <img loading="lazy" src="/images/flux_forge.png" alt="Flux Forge">
-            <h3>Flux Forge Nonprofit Partners</h3>
-            <p>Work with charity organizations that need student support for outreach systems, volunteer coordination, and impact reporting.</p>
-        </div>
-        <div class="feature">
-            <img loading="lazy" src="/images/nova_byte.png" alt="Nova Byte">
-            <h3>Nova Byte Initiatives</h3>
-            <p>Join student-led groups and department programs focused on mentoring, sustainability, and improving campus services.</p>
-        </div>
-        <div class="feature">
-            <img loading="lazy" src="/images/terra_pulse.png" alt="Terra Pulse">
-            <h3>Terra Pulse</h3>
-            <p>Terra helps you collaborate with community enterprises on technology solutions that increase efficiency, accessibility, and customer engagement.</p>
-        </div>
+        <% organizations.forEach(organization => { %>
+            <div class="feature">
+                <img loading="lazy" src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %> Logo">
+                <h3><%= organization.name %></h3>
+                <p><%= organization.description %></p>
+                <a href="mailto:<%= organization.contact_email %>"><%= organization.contact_email %></a>
+            </div>
+        <% }); %>
     </section>
 
     <section class="call-to-action">
