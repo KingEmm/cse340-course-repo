@@ -11,7 +11,12 @@
     </section>
 
     <section class="navigation-highlights">
-        <div class="feature">
+        <% categories.forEach(category => { %>
+            <div class="feature">
+                <h3><%= category.name %></h3>
+            </div>
+        <% }); %>
+        <!-- <div class="feature">
             <h3>Education & Outreach</h3>
             <p>Support tutoring, curriculum design, community workshops, and student engagement efforts.</p>
         </div>
@@ -22,7 +27,7 @@
         <div class="feature">
             <h3>Environment & Sustainability</h3>
             <p>Help create greener solutions through conservation, renewable energy, and sustainability planning.</p>
-        </div>
+        </div> -->
     </section>
 
     <section class="call-to-action">
