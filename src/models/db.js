@@ -50,11 +50,11 @@ if (process.env.NODE_ENV === 'development' && process.env.ENABLE_SQL_LOGGING ===
                 const start = Date.now();
                 const res = await pool.query(text, params);
                 const duration = Date.now() - start;
-                console.log('Executed query:', { 
-                    text: text.replace(/\s+/g, ' ').trim(), 
-                    duration: `${duration}ms`, 
-                    rows: res.rowCount 
-                });
+                // console.log('Executed query:', { 
+                //     text: text.replace(/\s+/g, ' ').trim(), 
+                //     duration: `${duration}ms`, 
+                //     rows: res.rowCount 
+                // });
                 return res;
             } catch (error) {
                 console.error('Error in query:', { 

@@ -96,4 +96,8 @@ INSERT INTO project_category (category_id, project_id)
 VALUES (2, 1), (1, 2), (2, 3), (3, 4), (1, 5), (1, 6), (3, 7),
 (1, 8), (3, 9), (3, 10), (1, 11), (1, 12), (2,13), (3, 14), (1, 15);
 
-select * from project_category;
+
+select  c.name, p.title distinct from 
+project_category pc join projects p join categories c
+on c.category_id = category_id on pc.project_id = p.project_id
+where pc.category_id = c.category_id;

@@ -37,10 +37,10 @@
         column-gap: 3%;
         & img{
             width: 100%;
-            grid-row: 1 / span 3;
             border-radius: .5rem;
         }
         & h3 {
+            grid-row: 1 / span 3;
             color: #4338ca;
         }
     }
@@ -64,23 +64,15 @@
 <main id="main-content">
     <section class="hero">
         <h1><%= title %></h1>
-        <p>Explore the organizations currently seeking CSE 340 student partners for service-driven technology and community projects.</p>
     </section>
 
-    <section class="intro">
-        <h2>Purpose-driven collaborators</h2>
-        <p>Each organization listed here has a real mission and specific needs. Learn how they apply technology, design, and service to solve local problems and support community goals.</p>
-    </section>
-
-    
     <section class="organization-highlights">
-        <% organizations.forEach(organization => { %>
-            <div class="feature">
-                <img loading="lazy" src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %> Logo">
-                <a class="" href="/organization/<%= organization.organization_id %>"><h3><%= organization.name %></h3></a>
-                <p><%= organization.description %></p>
-                <a href="mailto:<%= organization.contact_email %>"><%= organization.contact_email %></a>
-            </div>
+        <% projects.forEach(project => { %>
+            <a class="feature" href="/project/<%= project.project_id %>">
+                <h3><%= project.title %></h3>
+                <strong><%= project.organization_name %></strong>
+                <p><%= project.description %></p>
+            </a>
         <% }); %>
     </section>
 

@@ -1,0 +1,17 @@
+<%- include('partials/header') %>
+<main>
+    <section class="hero">
+        <h1><%= title %></h1>
+        <a href="/organization/<%= projectDetails.organization_id %>" target="_blank" rel="noopener noreferrer"><strong><%= projectDetails.name %></strong></a>
+        <p><%= projectDetails.description %></p>
+        <p>
+            Location: <%= projectDetails.location %><br>
+            Project Date: <%= projectDetails.project_date %><br>
+        </p>
+        <p>
+            
+        </p>
+    </section>
+
+
+<%- include('partials/footer') %>
