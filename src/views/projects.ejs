@@ -10,6 +10,8 @@
         <p>Each project is designed to address a specific challenge or opportunity. Learn the goals, expected outcomes, and how you can contribute your skills.</p>
     </section>
 
+    <div>Project Id: <%- projects[1].project_id %></div>
+
     <section class="navigation-highlights">
         <% projects.forEach(project => { %>
             <a href="/project/<%= project.project_id %>" class="feature">

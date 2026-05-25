@@ -4,8 +4,8 @@ const NUMBER_OF_UPCOMING_PROJECTS = 5;
  
 const projectsPage = async (req, res) => {
         const projects = await getUpcomingProjects(NUMBER_OF_UPCOMING_PROJECTS);
-        console.log(projects);
         const title = 'Upcoming Service Projects';
+        console.log(projects);
         res.render('projects', { title, projects });
 }
 

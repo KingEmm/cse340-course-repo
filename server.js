@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Middleware to log all incoming requests
 app.use((req, res, next) => {
   if (NODE_ENV === 'development') {
-    console.log(`${req.method} ${req.url}`);
+    console.log(`Request: ${req.method} ${req.url}`);
   }
   next(); // Pass control to the next middleware or route
 });
@@ -48,7 +48,6 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));
 
 app.use(router);
-
 
 // app.get('/categories', async (req, res) => {
 //   const title = 'Categories';
