@@ -6,11 +6,10 @@
         <p><%= projectDetails.description %></p>
         <p>
             Location: <%= projectDetails.location %><br>
-            Project Date: <%= projectDetails.project_date %><br>
+            Project Date: <%= new Date(projectDetails.project_date).toDateString() %><br>
         </p>
-        <p>
-            
-        </p>
+        <a href="/assign-category/<%= projectDetails.project_id %>">Edit Categories</a><br>
+        <a href="/edit-project/<%= projectDetails.project_id %>">Edit Project Details</a>
     </section>
 
 

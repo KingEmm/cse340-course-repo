@@ -1,4 +1,11 @@
+import { body, validationResult } from 'express-validator';
 import { getAllCategories, getProjectsByCategoryId  } from '../models/categories.js';
+
+const categoryValidation = [
+    body('category_id')
+        .isInt({ min: 1 })
+        .withMessage('Please select a valid category')
+];
 
 const getCategories = async (req, res) => {
   const title = 'Categories';
@@ -25,4 +32,4 @@ const getCategoryProjects = async (req, res) => {
     res.render('category', { title, projects });
 };
 
-export { getCategories, getCategoryProjects };
+export { getCategories, getCategoryProjects, categoryValidation };

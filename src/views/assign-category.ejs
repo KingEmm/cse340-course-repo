@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+<main>
+
+     <section class="hero">
+        <h1><%= project.title %></h1>
+        <p><%= project.description %></p>
+    </section>
+
+    <ul class="form-group">
+        <% project_category.forEach((pc) => { %>
+            <li> <%= pc.name %> </li>
+        <% }); %>
+    </ul>
+
+    <form action="/assign-category/<%= project.project_id %>" method="POST">
+
+        
+        <div class="form-group">
+        <label for="category_id">Category</label>
+        <select id="category_id" name="category_id" required>
+            <option value="">Select a category</option>
+            <% categories.forEach((cat) => { %>
+            <option value="<%= cat.category_id %>"><%= cat.name %></option>
+            <% }); %>
+        </select>
+        </div>
+        
+        <button type="submit">Create Project</button>
+    </form>
+
+</main>
+<%- include('partials/footer') %>
