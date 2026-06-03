@@ -1,7 +1,11 @@
 import { body, validationResult } from 'express-validator';
-import { getAllCategories, getProjectsByCategoryId  } from '../models/categories.js';
+import { getAllCategories, getProjectsByCategoryId, updateCategory, getCategoryById } from '../models/categories.js';
 
 const categoryValidation = [
+    body('name')
+        .notEmpty().withMessage('Category name is required')
+        .trim()
+        .isLength({ max: 100 }).withMessage('Category name must be at most 100 characters long'),
     body('category_id')
         .isInt({ min: 1 })
         .withMessage('Please select a valid category')
@@ -29,7 +33,37 @@ const getCategoryProjects = async (req, res) => {
     }
     console.log(projects);
     const title = projects[0].category_name + ' Projects' ;
-    res.render('category', { title, projects });
+    res.render('category', { title, projects, categoryId });
 };
 
-export { getCategories, getCategoryProjects, categoryValidation };
+const categoryEditForm = async (req, res) => {
+    const categoryId = req.params.id;
+    const category = await getCategoryById(categoryId);
+    const title = 'Edit Category';
+    res.render('edit-category', { title, category });
+};
+
+const editCategory = async (req, res) => {
+    const categoryId = req.params.id;
+    const name = req.body.name;
+
+    const result = validationResult(name);
+    if (!result.isEmpty()) {
+        result.array().forEach((error) => {
+            req.flash('error', error.msg);
+        });
+        return res.redirect(`/categories/${categoryId}/edit`);
+    }
+
+    try {
+        await updateCategory(categoryId, name);
+        req.flash('success', 'Category updated successfully!');
+        res.redirect('/categories');
+    } catch (error) {
+        console.error('Error updating category:', error);
+        req.flash('error', 'An error occurred while updating the category');
+        res.redirect(`/categories/${categoryId}/edit`);
+    }
+};
+
+export { getCategories, getCategoryProjects, categoryValidation, editCategory, categoryEditForm };

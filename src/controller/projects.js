@@ -90,7 +90,7 @@ const assignCategoryToProject = async (req, res) => {
     const projectId = req.params.id;
     const categoryId = req.body.category_id;
 
-    const result = validationResult(req);
+    const result = validationResult(categoryId);
     if (!result.isEmpty()) {
         req.flash('error', 'Invalid category selection');
         return res.redirect(`/assign-category/${projectId}`);
