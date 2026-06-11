@@ -9,7 +9,9 @@
         </p>
         <img src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %> Logo" loading="lazy" width="50" height="50">
     </section>
-    <a href="/edit-organization/<%= organization.organization_id %>">Edit Organization</a>
+    <% if (user && user.role_name === 'admin') { %>
+        <a href="/edit-organization/<%= organization.organization_id %>">Edit Organization</a>
+    <% } %>
     <h2>Current Projects</h2>
        <section class="navigation-highlights">
         <% projects.forEach(project => { %>

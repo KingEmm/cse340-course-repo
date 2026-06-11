@@ -4,16 +4,14 @@
         <h1><%= title %></h1>
         <p>Explore active and upcoming projects that invite student participation, collaboration, and community impact.</p>
     </section>
-    
+    <% if (user && user.role_name === 'admin') { %>
     <p><a href="/new-project">Add a new project</a></p>
-    
+    <% } %>
     <section class="intro">
         <h2>Projects with purpose</h2>
         <p>Each project is designed to address a specific challenge or opportunity. Learn the goals, expected outcomes, and how you can contribute your skills.</p>
     </section>
-    
-    <div>Project Id: <%- projects[1].project_id %></div>
-    
+        
     <section class="navigation-highlights">
         <% projects.forEach(project => { %>
             <a href="/project/<%= project.project_id %>" class="feature">

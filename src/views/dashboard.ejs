@@ -1,0 +1,49 @@
+<%- include('partials/header') %>
+
+<main id="main-content">
+    <section class="hero dashboard-hero">
+        <h1>Welcome back, <%= req.session.user.name %>!</h1>
+        <p>Use this dashboard to access organizations, projects, and categories from one central place.</p>
+    </section>
+
+    <section class="dashboard-overview">
+        <div class="dashboard-summary">
+            <article class="dashboard-card">
+                <h3>Your account</h3>
+                <p><strong>Name:</strong> <%= req.session.user.name %></p>
+                <p><strong>Email:</strong> <%= req.session.user.email %></p>
+            </article>
+
+            <article class="dashboard-card">
+                <h3>Quick links</h3>
+                <ul class="dashboard-actions">
+                    <li><a href="/organizations">Browse organizations</a></li>
+                    <li><a href="/projects">Browse projects</a></li>
+                    <li><a href="/categories">Browse categories</a></li>
+                </ul>
+            </article>
+
+            <article class="dashboard-card">
+                <h3>Next steps</h3>
+                <p>Visit organizations or projects to find your next service opportunity. Add categories to organize your work and connect with campus partners.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="navigation-highlights dashboard-highlights">
+        <div class="feature">
+            <h3>Organizations</h3>
+            <p>See which organizations are active, who leads them, and how they collaborate with students.</p>
+        </div>
+        <div class="feature">
+            <h3>Projects</h3>
+            <p>Explore ongoing and upcoming projects by theme, timeline, and need.</p>
+        </div>
+        <div class="feature">
+            <h3>Categories</h3>
+            <p>Filter service opportunities by category to find work that matches your interests and skills.</p>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/footer') %>

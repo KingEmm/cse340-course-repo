@@ -71,8 +71,9 @@
         <h2>Purpose-driven collaborators</h2>
         <p>Each organization listed here has a real mission and specific needs. Learn how they apply technology, design, and service to solve local problems and support community goals.</p>
     </section>
-    
-    <p><a href="/new-organization">Add a new organization +</a></p>
+    <% if (user && user.role_name === 'admin') { %>
+        <p><a href="/new-organization">Add a new organization +</a></p>
+    <% } %>
 
     <section class="organization-highlights">
         <% organizations.forEach(organization => { %>

@@ -1,5 +1,5 @@
 import { body, validationResult } from 'express-validator';
-import { getAllCategories, getProjectsByCategoryId, updateCategory, getCategoryById } from '../models/categories.js';
+import { getAllCategories, getProjectsByCategoryId, updateCategory, getCategoryById, addCategory } from '../models/categories.js';
 
 const categoryValidation = [
     body('name')
@@ -25,15 +25,59 @@ const getCategoryProjects = async (req, res) => {
     err.status = 400;
     next(err);
   }
-  const projects = await getProjectsByCategoryId(categoryId);
-    if (!projects.length) {
-        const err = new Error('Category not found');
-        err.status = 404;
+
+  const result = validationResult(categoryId);
+    if (!result.isEmpty()) {
+        result.array().forEach((error) => {
+            req.flash('error', error.msg);
+        });
+        return res.redirect(`/categories/${categoryId}/edit`);
+    }
+    try {
+        const projects = await getProjectsByCategoryId(categoryId);
+        console.log(`Projects for category ${categoryId}:`, projects);
+
+        console.log(projects);
+        if (projects.length === 0) {
+            const category = await getCategoryById(categoryId);
+            const title = category ? `${category.name} Projects` : 'Category Projects';
+            return res.render('category', { title, projects: [], categoryId });
+        }
+        const title = projects[0].category_name + ' Projects' ;
+        res.render('category', { title, projects, categoryId });
+    } catch (error) {
+        console.error('Error fetching category projects:', error);
+        const err = new Error('Error fetching category projects');
+        err.status = 500;
         next(err);
     }
-    console.log(projects);
-    const title = projects[0].category_name + ' Projects' ;
-    res.render('category', { title, projects, categoryId });
+};
+
+const addCategoryForm = async (req, res) => {
+    const title = 'Add Category';
+    res.render('add-category', { title });
+};
+
+const addACategory = async (req, res) => {
+    const name = req.body.name;
+
+    const result = validationResult(name);
+    if (!result.isEmpty()) {
+        result.array().forEach((error) => {
+            req.flash('error', error.msg);
+        });
+        return res.redirect(`/add-category`);
+    }
+
+    try {
+        await addCategory(name);
+        req.flash('success', 'Category added successfully!');
+        res.redirect('/categories');
+    } catch (error) {
+        console.error('Error adding category:', error);
+        req.flash('error', 'An error occurred while adding the category');
+        res.redirect(`/add-category/`);
+    }
 };
 
 const categoryEditForm = async (req, res) => {
@@ -42,6 +86,7 @@ const categoryEditForm = async (req, res) => {
     const title = 'Edit Category';
     res.render('edit-category', { title, category });
 };
+
 
 const editCategory = async (req, res) => {
     const categoryId = req.params.id;
@@ -66,4 +111,4 @@ const editCategory = async (req, res) => {
     }
 };
 
-export { getCategories, getCategoryProjects, categoryValidation, editCategory, categoryEditForm };
+export { getCategories, getCategoryProjects, categoryValidation, editCategory, categoryEditForm, addCategoryForm, addACategory };

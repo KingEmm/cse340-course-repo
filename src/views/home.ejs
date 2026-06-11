@@ -31,4 +31,9 @@
         <p>Use the menu above to explore Organizations, Projects, or Categories. The CSE 340 Service Network is your gateway to collaborate, learn, and create impact.</p>
     </section>
 </main>
+
+<% if (isLoggedIn) { %>
+    <p>Welcome back! <a href="/dashboard">View your dashboard</a> to see your activity and connections.</p>
+<% } %>
+<!-- <a href="/dashboard">View Dashboard</a> -->
 <%- include('partials/footer') %>

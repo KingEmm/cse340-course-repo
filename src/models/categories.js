@@ -63,4 +63,11 @@ const updateProjectCategory = async (projectId, categoryId) => {
     await db.query(query, [categoryId, projectId]);
 }
 
-export {getAllCategories, getProjectsByCategoryId, assignProjectCategory, updateCategoryAssignments, updateProjectCategory, updateCategory, getCategoryById}
+const addCategory = async (name) => {
+    console.log(`Adding category: ${name}`);
+    const query = `INSERT INTO categories (name) VALUES ($1) RETURNING category_id`;
+    const result = await db.query(query, [name]);
+    return result.rows[0].category_id;
+}
+
+export {getAllCategories, getProjectsByCategoryId, assignProjectCategory, updateCategoryAssignments, updateProjectCategory, updateCategory, getCategoryById, addCategory}

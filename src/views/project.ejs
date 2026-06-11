@@ -8,8 +8,10 @@
             Location: <%= projectDetails.location %><br>
             Project Date: <%= new Date(projectDetails.project_date).toDateString() %><br>
         </p>
-        <a href="/assign-category/<%= projectDetails.project_id %>">Edit Categories</a><br>
-        <a href="/edit-project/<%= projectDetails.project_id %>">Edit Project Details</a>
+        <% if (user && user.role_name === 'admin') { %>
+            <a href="/assign-category/<%= projectDetails.project_id %>">Edit Categories</a><br>
+            <a href="/edit-project/<%= projectDetails.project_id %>">Edit Project Details</a>
+        <% } %>
     </section>
 
 

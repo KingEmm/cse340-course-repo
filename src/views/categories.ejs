@@ -9,7 +9,9 @@
         <h2>Service categories for focused impact</h2>
         <p>Each category represents a different way to serve the community. Whether you’re passionate about education, sustainability, technology, or outreach, this page helps you find the best fit.</p>
     </section>
-
+    <% if (user && user.role_name === 'admin') { %>
+        <a href="/add-category">Add Category</a>
+    <% } %>
     <section class="navigation-highlights">
         <% categories.forEach(category => { %>
             <a href="/category/<%= category.category_id %>" class="feature">

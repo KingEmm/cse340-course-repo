@@ -64,7 +64,10 @@
 <main id="main-content">
     <section class="hero">
         <h1><%= title %></h1>
-        <a href="/edit-category/<%= categoryId %>">Edit Category</a>
+        <% if (user && user.role_name === 'admin') { %>
+            <a href="/edit-category/<%= categoryId %>">Edit Category</a>
+        <% } %>
+
     </section>
 
     <section class="organization-highlights">
