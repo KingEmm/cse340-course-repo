@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { createUser , findUserByEmail} from '../models/users.js';
+import { createUser , findUserByEmail, getAllUsers } from '../models/users.js';
 import { body, validationResult } from 'express-validator';
 
 
@@ -129,6 +129,13 @@ const showDashboard = (req, res) => {
     res.render('dashboard', { title, req });
 }
 
-export { userValidation, requireRole, requireLogin, showUserRegistrationForm, processUserRegistrationForm, showLoginForm, processLoginForm, processLogout, showDashboard };
+const showUsersPage = async (req, res) => {
+    const title = 'Admin';
+    const users = await getAllUsers();
+    // console.log(`Users: ${JSON.stringify(users)}`);
+    res.render('users', { title, users, req });
+}
+
+export { userValidation, requireRole, requireLogin, showUserRegistrationForm, processUserRegistrationForm, showLoginForm, processLoginForm, processLogout, showDashboard, showUsersPage };
 // The hash looks like: $2b$10$N9qo8uLOickgx2ZMRZoMye...
 // console.log(passwordHash);

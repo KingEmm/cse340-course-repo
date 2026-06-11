@@ -40,4 +40,16 @@ const findUserByEmail = async (email) => {
     return result.rows[0];
 };
 
-export { createUser, findUserByEmail };
+const getAllUsers = async () => {
+    const Query = `
+        SELECT u.user_id, u.name, u.email, r.role_name, r.role_description
+        FROM users u
+        JOIN roles r ON u.role_id = r.role_id;
+    `
+
+    const result = await db.query(Query);
+
+    return result.rows;
+}
+
+export { createUser, findUserByEmail, getAllUsers };

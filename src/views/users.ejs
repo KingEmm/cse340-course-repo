@@ -1,0 +1,48 @@
+<%- include('partials/header') %>
+
+<main id="main-content" class="users-page">
+    <section class="hero users-hero">
+        <h1><%= title %></h1>
+        <p>Review registered users, roles, and access details for the service network.</p>
+    </section>
+
+    <section class="users-summary">
+        <div class="dashboard-card">
+            <h3>Registered users</h3>
+            <p><strong><%= users && users.length ? users.length : 0 %></strong> total users</p>
+            <p>This list is visible only to administrators.</p>
+        </div>
+    </section>
+
+    <section class="users-table-wrapper">
+        <table class="users-table">
+            <caption>Registered users</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Role description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (users && users.length > 0) { %>
+                    <% users.forEach(user => { %>
+                        <tr>
+                            <td><%= user.name %></td>
+                            <td><%= user.email %></td>
+                            <td><%= user.role_name %></td>
+                            <td><%= user.role_description || '—' %></td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="4">No registered users were found.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<%- include('partials/footer') %>

@@ -1,7 +1,7 @@
 import { showOrganizationDetailsPage, organizationsPage, showNewOrganizationForm, processNewOrganizationForm, organizationValidation, editOrganizationForm, showOrganizationForm } from './controller/organizations.js';
 import { projectsPage, showProjectDetailsPage, createAProject, createProjectView, projectValidation, showAssignCategoriesForm, assignCategoryToProject, showEditProjectForm, processEditProjectForm } from './controller/projects.js';
 import { getCategories, getCategoryProjects, categoryValidation, categoryEditForm, editCategory, addACategory, addCategoryForm } from './controller/categories.js';
-import { requireRole, showUserRegistrationForm, processUserRegistrationForm, userValidation, showLoginForm, processLoginForm, processLogout, requireLogin, showDashboard } from './controller/users.js';
+import { requireRole, showUserRegistrationForm, processUserRegistrationForm, userValidation, showLoginForm, processLoginForm, processLogout, requireLogin, showDashboard, showUsersPage } from './controller/users.js';
 import { getHome } from './controller/index.js';
 import express from 'express';
 
@@ -35,5 +35,6 @@ router.get('/login', showLoginForm);
 router.post('/login', processLoginForm);
 router.get('/logout', processLogout);
 router.get('/dashboard', requireLogin, showDashboard);
+router.get('/users', requireRole('admin'), showUsersPage)
 
 export default router;
