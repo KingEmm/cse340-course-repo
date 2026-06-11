@@ -8,6 +8,15 @@
             Location: <%= projectDetails.location %><br>
             Project Date: <%= new Date(projectDetails.project_date).toDateString() %><br>
         </p>
+        <% if (user) { %>
+            <% if (isVolunteer == null ) { %>
+                <a href="/volunteer/<%= projectDetails.project_id %>" class="btn btn-primary">Volunteer <strong>→</strong></a> <br>
+            <% } else { %>
+                <p>You signed up for this project.</p>
+                <a href="/cancel-volunteer/<%= projectDetails.project_id %>" class="btn btn-secondary">Cancel Volunteer</a>
+            <% } %>
+        <% } %>
+
         <% if (user && user.role_name === 'admin') { %>
             <a href="/assign-category/<%= projectDetails.project_id %>">Edit Categories</a><br>
             <a href="/edit-project/<%= projectDetails.project_id %>">Edit Project Details</a>

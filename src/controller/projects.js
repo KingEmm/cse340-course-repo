@@ -2,7 +2,7 @@ import { body, validationResult } from 'express-validator';
 import { getProjectDetails, getUpcomingProjects, createProject, getAllProjectsName, getCategoriesByServiceProjectId, updateProject } from '../models/projects.js';
 import { getAllOrganizations } from '../models/organizations.js';
 import { getAllCategories, updateCategoryAssignments, assignProjectCategory, updateProjectCategory } from '../models/categories.js'
-
+import { checkVolunteerAssignment, assignProjectToUser, cancelVolunteerAssignment } from '../models/users.js';
 
 const NUMBER_OF_UPCOMING_PROJECTS = 5;
 
@@ -32,7 +32,7 @@ const projectValidation = [
 const projectsPage = async (req, res) => {
         const projects = await getUpcomingProjects(NUMBER_OF_UPCOMING_PROJECTS);
         const title = 'Upcoming Service Projects';
-        console.log(projects);
+        
         res.render('projects', { title, projects });
 }
 
@@ -40,8 +40,40 @@ const showProjectDetailsPage = async (req, res) => {
     const projectId = req.params.id;
     const projectDetails = await getProjectDetails(projectId);
     const title = 'Project Details';
-    console.log(projectDetails);
-    res.render('project', { title, projectDetails });
+    const isVolunteer = await checkVolunteerAssignment(req.session.user ? req.session.user.user_id : null, projectId);
+    console.log(isVolunteer);
+    // console.log(projectDetails);
+    res.render('project', { title, projectDetails, isVolunteer });
+}
+
+const volunteerForProject = async (req, res) => {
+    const projectId = req.params.id;
+    const userId = req.session.user.user_id;
+
+    try {
+        await assignProjectToUser(userId, projectId);
+        req.flash('success', 'You have successfully signed up for this project.');
+        res.redirect(`/project/${projectId}`);
+    } catch (error) {
+        console.error('Error occurred while signing up for project:', error);
+        req.flash('error', 'Failed to sign up for the project.');
+        res.redirect(`/project/${projectId}`);
+    }
+}
+
+const cancelVolunteer = async (req, res) => {
+    const projectId = req.params.id;
+    const userId = req.session.user.user_id;
+
+    try {
+        await cancelVolunteerAssignment(userId, projectId);
+        req.flash('success', 'You have successfully canceled your volunteer commitment for this project.');
+        res.redirect(`/project/${projectId}`);
+    } catch (error) {
+        console.error('Error occurred while canceling volunteer commitment:', error);
+        req.flash('error', 'Failed to cancel volunteer commitment.');
+        res.redirect(`/project/${projectId}`);
+    }
 }
 
 const createProjectView = async (req, res) => {
@@ -152,4 +184,4 @@ const processEditProjectForm = async (req, res) => {
     }
 };
 
-export { projectsPage, showProjectDetailsPage, createAProject, createProjectView, projectValidation, showAssignCategoriesForm, assignCategoryToProject, showEditProjectForm, processEditProjectForm };
+export { projectsPage, showProjectDetailsPage, createAProject, volunteerForProject, cancelVolunteer, createProjectView, projectValidation, showAssignCategoriesForm, assignCategoryToProject, showEditProjectForm, processEditProjectForm };

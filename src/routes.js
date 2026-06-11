@@ -1,5 +1,5 @@
 import { showOrganizationDetailsPage, organizationsPage, showNewOrganizationForm, processNewOrganizationForm, organizationValidation, editOrganizationForm, showOrganizationForm } from './controller/organizations.js';
-import { projectsPage, showProjectDetailsPage, createAProject, createProjectView, projectValidation, showAssignCategoriesForm, assignCategoryToProject, showEditProjectForm, processEditProjectForm } from './controller/projects.js';
+import { projectsPage, showProjectDetailsPage, createAProject, createProjectView, projectValidation, showAssignCategoriesForm, assignCategoryToProject, showEditProjectForm, processEditProjectForm, volunteerForProject, cancelVolunteer } from './controller/projects.js';
 import { getCategories, getCategoryProjects, categoryValidation, categoryEditForm, editCategory, addACategory, addCategoryForm } from './controller/categories.js';
 import { requireRole, showUserRegistrationForm, processUserRegistrationForm, userValidation, showLoginForm, processLoginForm, processLogout, requireLogin, showDashboard, showUsersPage } from './controller/users.js';
 import { getHome } from './controller/index.js';
@@ -19,6 +19,8 @@ router.get('/projects', projectsPage);
 router.get('/new-project', requireRole('admin'), createProjectView);
 router.post('/new-project', requireRole('admin'), projectValidation, createAProject);
 router.get('/project/:id', showProjectDetailsPage);
+router.get('/volunteer/:id', requireLogin, volunteerForProject);
+router.get('/cancel-volunteer/:id', requireLogin, cancelVolunteer);
 router.get('/categories', getCategories);
 router.get('/add-category', requireRole('admin'), addCategoryForm);
 router.post('/add-category', requireRole('admin'), categoryValidation, addACategory);
