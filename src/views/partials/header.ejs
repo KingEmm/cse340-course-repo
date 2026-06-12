@@ -18,8 +18,13 @@
             <a class="brand-link" href="/"><img loading="lazy" src="/images/aether_core.png" alt="Aether Core" width="50" height="50" srcset=""></a>
             <!-- <p class="site-tagline">Student-led service projects and community organization connections.</p> -->
         </div>
-        <nav aria-label="Primary navigation">
-            <ul>
+        <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true" focusable="false">
+                <path d="M5 8h18M5 14h18M5 20h18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+            </svg>
+        </button>
+        <nav id="primary-nav" aria-label="Primary navigation" class="nav-panel">
+            <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/organizations">Organizations</a></li>
                 <li><a href="/projects">Projects</a></li>
@@ -27,6 +32,8 @@
                 <% if (user && user.role_name === 'admin') { %>
                     <li><a href="/users">Users</a></li>
                 <% } %>
+            </ul>
+            <ul class="auth-links">
                 <% if (!isLoggedIn) { %>
                     <li><a href="/register">Register</a></li>
                     <li><a href="/login">Login</a></li>
@@ -34,7 +41,6 @@
                     <li><a href="/dashboard">Dashboard</a></li>
                     <li><a href="/logout">Logout</a></li>
                 <% } %>
-
             </ul>
         </nav>
     </header>   
@@ -43,7 +49,7 @@
         <% if (messages[type].length > 0) { %>
             
                 <% messages[type].forEach(msg => { %>
-                    <div class="alert <%= type %>"><%= msg %></div>
+                    <div class="alert <%= type %>"><%- msg %></div>
                 <% }); %>
             
         <% } %>
